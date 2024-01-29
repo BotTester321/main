@@ -10,8 +10,8 @@ on:
   pull_request:
 
 env:
-  CF_ACCOUNT_ID: ${{ env.CF_ACCOUNT_ID }}
-  PAGES_PROJECT_NAME: ${{ env.PAGES_PROJECT_NAME }}
+  CF_ACCOUNT_ID: cd267cbd74046d020900533322f0fab8
+  PAGES_PROJECT_NAME: rqrqrq
 
 jobs:
   deploy:
