@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3  # Обновлено до v3
 
     # Добавьте шаги для сборки вашего сайта, если это необходимо
     # - name: Build
@@ -23,3 +23,4 @@ jobs:
         apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         projectName: rqrqrq
         accountId: cd267cbd74046d020900533322f0fab8
+        directory: 'main'  # Укажите директорию для сборки
