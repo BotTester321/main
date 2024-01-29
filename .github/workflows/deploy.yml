@@ -24,3 +24,41 @@ jobs:
         projectName: rqrqrq
         accountId: cd267cbd74046d020900533322f0fab8
         directory: 'main'  # Укажите директорию для сборки
+
+
+
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+      - qa
+  pull_request:
+
+env:
+  CF_ACCOUNT_ID: your-cloudflare-account-id
+  PAGES_PROJECT_NAME: your-pages-project-name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      # Добавьте шаги сборки вашего проекта здесь, если требуется
+      # - name: Build
+      #   run: ваша команда сборки
+
+      - name: Deploy to Cloudflare Pages
+        uses: tomjschuster/cloudflare-pages-deploy-action@v0.0.12
+        with:
+          account-id: cd267cbd74046d020900533322f0fab8
+          project-name: rqrqrq
+          api-key: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          email: mailfortable@gmail.com
+          # Укажите 'true' для production или 'preview', или оставьте 'branch'
+          production: true # Или 'preview' или 'branch: ${{ github.ref_name }}'
+          github-token: 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
