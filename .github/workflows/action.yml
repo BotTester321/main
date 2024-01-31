@@ -18,4 +18,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CF_API_NORM }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy --project-name=sitenum1 /low1site
+          command: pages deploy --project-name=sitenum1 .
