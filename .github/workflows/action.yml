@@ -11,11 +11,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Unzip archive
-        run: unzip firstsite.zip -d .
+        run: unzip low1site.zip -d .
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_API_NORM }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy --project-name=sitenum1 /firstsite
+          command: pages deploy --project-name=sitenum1 /low1site
