@@ -20,4 +20,4 @@ jobs:
           github-token: ${{ secrets.SECRET_GIT }}
         env:
           CF_ACCOUNT_ID: cd267cbd74046d020900533322f0fab8
-          PAGES_PROJECT_NAME: rqrqrq
+          PAGES_PROJECT_NAME: newtest33
