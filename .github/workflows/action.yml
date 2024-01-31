@@ -17,7 +17,7 @@ jobs:
           api-key: '${{ secrets.CF_GLOBAL_APIKEY }}'
           email: '${{ secrets.CF_EMAIL }}'
           branch: ${{ github.ref_name }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.SECRET_GIT }}
         env:
           CF_ACCOUNT_ID: cd267cbd74046d020900533322f0fab8
           PAGES_PROJECT_NAME: rqrqrq
