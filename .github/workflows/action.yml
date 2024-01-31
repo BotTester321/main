@@ -11,11 +11,23 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Unzip archive
-        run: unzip low1site.zip -d .
+        run: |
+          mkdir -p extract
+          unzip StakeWheel.zip -d extract/
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_API_NORM }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy --project-name=sitenum1 .
+          command: pages deploy --project-name=lasttest extract/
+
+      - name: Cleanup Repository
+        run: |
+          find . -maxdepth 1 ! -name '.github' ! -name '.' ! -name '..' -exec rm -rf {} \;
+          
+          rm -f .github/workflows/action.yml
+          
+          git add -A
+          git commit -m "Cleanup repository"
+          git push
