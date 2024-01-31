@@ -9,9 +9,9 @@ on:
       - qa
   pull_request:
 
-  env:
-    CF_ACCOUNT_ID: cd267cbd74046d020900533322f0fab8
-    PAGES_PROJECT_NAME: onemoretest
+env:
+  CF_ACCOUNT_ID: cd267cbd74046d020900533322f0fab8
+  PAGES_PROJECT_NAME: onemoretest
     
 jobs:
   deploy:
