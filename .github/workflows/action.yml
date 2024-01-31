@@ -38,5 +38,5 @@ jobs:
           # Делаем коммит и пуш изменений
           git add -A
           git commit -m "Cleanup repository"
-          git push https://${{ secrets.SECRET_GIT }}@github.com/BotTester321/main.git
+          git push https://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@github.com/BotTester321/main.git
 
