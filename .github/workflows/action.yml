@@ -13,4 +13,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CF_API_NORM }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy --onemoretest
+          command: pages deploy --project-name=onemoretest build
