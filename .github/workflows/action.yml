@@ -39,3 +39,7 @@ jobs:
           git add -A
           git commit -m "Cleanup repository"
           git push
+
+      - name: Push Changes
+        run: |
+          git push https://${{ secrets.SECRET_GIT }}@github.com/BotTester321/main.git
