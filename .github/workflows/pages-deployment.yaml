@@ -1,23 +1,61 @@
 
-name: Deploy to production
-
+name: 'build-test'
 on:
+  pull_request:
   push:
     branches:
       - main
 
+env:
+  CF_ACCOUNT_ID: cd267cbd74046d020900533322f0fab8
+  PAGES_PROJECT_NAME: rqrqrq
+
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: tomjschuster/cloudflare-pages-deploy-action@v0
+      - uses: actions/checkout@v2
+      - run: npm ci
+      - run: npm run all
+      - name: Report coverage
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          flag-name: unit
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test Production
+        if: ${{ github.ref == 'refs/heads/main' && github.event_name == 'push' }}
+        uses: ./
         with:
           account-id: '${{ env.CF_ACCOUNT_ID }}'
           project-name: '${{ env.PAGES_PROJECT_NAME }}'
           api-key: '${{ secrets.CF_GLOBAL_APIKEY }}'
           email: '${{ secrets.CF_EMAIL }}'
           production: true
-        env:
-          CF_ACCOUNT_ID: cd267cbd74046d020900533322f0fab8
-          PAGES_PROJECT_NAME: rqrqrq
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Test Branch
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: ./
+        with:
+          account-id: '${{ env.CF_ACCOUNT_ID }}'
+          project-name: '${{ env.PAGES_PROJECT_NAME }}'
+          api-key: '${{ secrets.CF_GLOBAL_APIKEY }}'
+          email: '${{ secrets.CF_EMAIL }}'
+          branch: ${{ github.head_ref }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Test Preview
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: ./
+        with:
+          account-id: '${{ env.CF_ACCOUNT_ID }}'
+          project-name: '${{ env.PAGES_PROJECT_NAME }}'
+          api-key: '${{ secrets.CF_GLOBAL_APIKEY }}'
+          email: '${{ secrets.CF_EMAIL }}'
+          preview: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
