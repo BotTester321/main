@@ -22,6 +22,11 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy --project-name=lasttest extract/
 
+      - name: Setup Git User
+        run: |
+          git config user.name "BotTester321"
+          git config user.email "mailfortable@gmail.com"
+
       - name: Cleanup Repository
         run: |
           # Удаляем все файлы и папки в корне, кроме .github и .git
