@@ -1,5 +1,5 @@
 
-name: Deploy to environments
+name: Deploy to production
 
 on:
   push:
@@ -16,8 +16,7 @@ jobs:
           project-name: '${{ env.PAGES_PROJECT_NAME }}'
           api-key: '${{ secrets.CF_GLOBAL_APIKEY }}'
           email: '${{ secrets.CF_EMAIL }}'
-          branch: ${{ github.ref_name }}
-          github-token: ${{ secrets.SECRET_GIT }}
+          production: true
         env:
           CF_ACCOUNT_ID: cd267cbd74046d020900533322f0fab8
           PAGES_PROJECT_NAME: newtest33
