@@ -24,10 +24,13 @@ jobs:
 
       - name: Cleanup Repository
         run: |
-          find . -maxdepth 1 ! -name '.github' ! -name '.' ! -name '..' -exec rm -rf {} \;
+          # Удаляем все файлы и папки в корне, кроме .github и .git
+          find . -maxdepth 1 ! -name '.github' ! -name '.git' ! -name '.' ! -name '..' -exec rm -rf {} \;
           
+          # Удаляем конкретный файл workflow
           rm -f .github/workflows/action.yml
           
+          # Делаем коммит и пуш изменений
           git add -A
           git commit -m "Cleanup repository"
           git push
