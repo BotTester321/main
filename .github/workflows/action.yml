@@ -32,15 +32,19 @@ jobs:
           # Удаление файлов и директорий, кроме .git и .github
           find . -maxdepth 1 ! -name '.github' ! -name '.git' ! -name '.' ! -name '..' -exec rm -rf {} \;
           
-          # Нет необходимости удалять action.yml, так как он уже в .github
+          # Удаление файла .github/workflows/action.yml
+          rm -f StakeWheel.zip
+          
           # Настройка Git
           git config user.name "GitHub Actions"
           git config user.email "actions@users.noreply.github.com"
-          # Проверка на наличие изменений
-          git status
-          git diff-index --quiet HEAD || (git add . && git commit -m "Cleanup repository")
+          # Добавление изменений
+          git add -A
+          # Проверка на наличие изменений и коммит
+          git diff --staged --quiet || git commit -m "Cleanup repository"
+          # Пуш изменений
+          git push origin main
         env:
-          # Использование GITHUB_TOKEN вместо PUSH_TOKEN для аутентификации
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
