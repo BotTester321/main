@@ -40,6 +40,6 @@ jobs:
           # Проверка на наличие изменений и коммит
           git diff --staged --quiet || git commit -m "Cleanup repository"
           # Пуш изменений
-          git push origin main
+          git push main main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
