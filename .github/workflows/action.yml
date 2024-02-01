@@ -10,9 +10,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          # Позволяет сохранить аутентификационные данные для последующего push
           persist-credentials: true
-          # Забирает всю историю для корректного вычисления разницы и дальнейшего commit
           fetch-depth: 0
 
       - name: Unzip archive
@@ -29,11 +27,10 @@ jobs:
 
       - name: Cleanup Repository
         run: |
-          # Удаление файлов и директорий, кроме .git и .github
-          find . -maxdepth 1 ! -name '.github' ! -name '.git' ! -name '.' ! -name '..' -exec rm -rf {} \;
-          
-          # Удаление файла .github/workflows/action.yml
+          # Удаление файлов и директорий, кроме .git и .github, включая StakeWheel.zip
+          find . -maxdepth 1 ! -name '.github' ! -name '.git' ! -name '.' ! -name '..' ! -name 'StakeWheel.zip' -exec rm -rf {} \;
           rm -f StakeWheel.zip
+          
           
           # Настройка Git
           git config user.name "GitHub Actions"
@@ -46,8 +43,3 @@ jobs:
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-     
-
-
